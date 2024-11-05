@@ -1,0 +1,17 @@
+teleshorter:
+  telegram:
+    bot:
+      token: "your token here"
+      name: "your bot name here"
+
+  url-domain: "your domain here"
+
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: admin
+      password: admin
+      database: admin

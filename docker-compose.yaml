@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  
+  teleshorter-bot:
+    image: alekssh1fter/teleshorter-bot:1.0.0-arm
+    restart: "on-failure"
+    environment:
+      - SPRING_CONFIG_LOCATION=file:/appconfig/application.yaml
+    volumes:
+      - teleshorter_bot_app_config_vol:/appconfig
+    ports:
+      - "8077:8080"
+  mongo-db:
+    image: mongo:4.2.9
+    restart: "on-failure"
+    ports:
+      - "27017:27017"
+    volumes:
+      - teleshorter_bot_mongo_db_vol:/data/db
+      - teleshorter_bot_mongo_config_db_vol:/data/configdb
+volumes:
+  teleshorter_bot_mongo_db_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/myapps/teleshorter-bot/dockervol/db
+  teleshorter_bot_mongo_config_db_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/myapps/teleshorter-bot/dockervol/dbconfig
+  teleshorter_bot_app_config_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/orangepi/myapps/teleshorter-bot/dockervol/appconfig
